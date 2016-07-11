@@ -1,4 +1,4 @@
-(ns clojure-samples.funcs)
+(ns clojure-lab-01.funcs)
 
 (defn func1 []
   "Print func1"

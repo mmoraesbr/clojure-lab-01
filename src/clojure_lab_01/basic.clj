@@ -1,4 +1,4 @@
-(ns clojure-samples.basic)
+(ns clojure-lab-01.basic)
 
 ;; variables declarations
 

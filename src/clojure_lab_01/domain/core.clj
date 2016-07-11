@@ -1,4 +1,4 @@
-(ns clojure-samples.domain.core)
+(ns clojure-lab-01.domain.core)
 
 
 (defn round [n scale]

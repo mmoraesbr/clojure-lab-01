@@ -1,4 +1,4 @@
-(ns clojure-samples.labs)
+(ns clojure-lab-01.labs)
 
 
 (defn exec [text]

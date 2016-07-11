@@ -1,6 +1,6 @@
-(ns clojure-samples.domain.service
-  (:require [clojure-samples.domain.core :refer :all])
-  (:require [clojure-samples.domain.repo :as rep]))
+(ns clojure-lab-01.domain.service
+  (:require [clojure-lab-01.domain.core :refer :all])
+  (:require [clojure-lab-01.domain.repo :as rep]))
 
 
 ;; ----------------------------------------------------

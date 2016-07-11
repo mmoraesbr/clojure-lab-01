@@ -1,8 +1,8 @@
-(ns clojure-samples.domain.service-test
+(ns clojure-lab-01.domain.service-test
   (:require [clojure.test :refer :all]
-            [clojure-samples.tools :refer :all]
-            [clojure-samples.domain.service :as srv]
-            [clojure-samples.domain.repo :as repo :refer [database find-cost-pending]]))
+            [clojure-lab-01.tools :refer :all]
+            [clojure-lab-01.domain.service :as srv]
+            [clojure-lab-01.domain.repo :as repo :refer [database find-cost-pending]]))
 
 
 (defn set-db! [transactions]

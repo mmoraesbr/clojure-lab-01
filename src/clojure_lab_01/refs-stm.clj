@@ -1,4 +1,4 @@
-(ns clojure-samples)
+(ns clojure-lab-01)
 
 
 (defn send-notification [acc]

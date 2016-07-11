@@ -1,4 +1,4 @@
-(ns clojure-samples.ddd)
+(ns clojure-lab-01.ddd)
 
 (defprotocol IOrder
   (add-item [this item])

@@ -1,4 +1,4 @@
-(ns clojure-samples.core
+(ns clojure-lab-01.core
   (:gen-class))
 
 (defn -main

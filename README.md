@@ -1,4 +1,4 @@
-# clojure-samples
+# clojure-lab-01
 
 FIXME: description
 
@@ -10,7 +10,7 @@ Download from http://example.com/FIXME.
 
 FIXME: explanation
 
-    $ java -jar clojure-samples-0.1.0-standalone.jar [args]
+    $ java -jar clojure-lab-01-0.1.0-standalone.jar [args]
 
 ## Options
 

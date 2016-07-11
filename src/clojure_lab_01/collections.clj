@@ -1,5 +1,5 @@
 
-(ns clojure-samples.collections)
+(ns clojure-lab-01.collections)
 
 ;; Vector
 (def vec1 [5 6 7 8 9 10 11])

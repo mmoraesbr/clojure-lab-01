@@ -1,4 +1,4 @@
-(ns clojure-samples.tools)
+(ns clojure-lab-01.tools)
 
 
 (defn round [s n]
