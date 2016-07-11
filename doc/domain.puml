@@ -3,8 +3,12 @@
 class Transaction {
     + value
 }
-class Creditor
-class Debtor
+class Creditor {
+    + type
+}
+class Debtor {
+    + type
+}
 class TransCostsPlan {
     + tax
     + rate
@@ -32,8 +36,8 @@ Transaction --> "1" Debtor : has one
 
 Creditor --> "1" UserType
 Debtor --> "1" UserType
-TransCostsService ..> "*" Transaction : " calculates \ncosts of"
-TransCostsService .left.> TransCostsPlan : load
-Transaction --> "1" TransCosts : has
-TransCostsService ..> TransCostsSummary : returns
+TransCostsService ..> "1..*" Transaction : "calculates \ncosts"
+TransCostsService .left.> TransCostsPlan : apply
+Transaction --> "0..1" TransCosts : has
+TransCostsService .right.> TransCostsSummary : returns
 @enduml

@@ -10,14 +10,14 @@
 
 (defmethod load-costs-plan :special [_]
   "Retorna uma regra fixa para o tipo :special"
-  {:rules
+  {:plan
    {:tax  2.0M
     :rate 0.10M}})
 
 (defmethod load-costs-plan :regular
   [_]
   "Retorna uma regra fixa para o tipo :regular"
-  {:rules
+  {:plan
    {:tax  4.0M
     :rate 0.40M}})
 
@@ -35,7 +35,7 @@
 
 (defn calc-costs [trans]
   "Calcula os valores baseados nas regras do Plano de Custo"
-  (let [{{{:keys [tax rate]} :rules} :costs} trans
+  (let [{{{:keys [tax rate]} :plan} :costs} trans
         tax-val (-> tax (/ 100) (* (:value trans)))
         rate-val rate]
     ;; associa o costs com trans

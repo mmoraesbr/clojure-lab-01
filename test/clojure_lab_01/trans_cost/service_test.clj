@@ -40,11 +40,11 @@
      (fn [user]
        ((:type user)
          {:special
-          {:rules
+          {:plan
            {:tax (:special-tax defaults)
             :rate (:special-rate defaults)}}
           :regular
-          {:rules
+          {:plan
            {:tax (:regular-tax defaults)
             :rate (:regular-rate defaults)}}}))}
     #(f)))
@@ -86,7 +86,7 @@
   (testing "Test One Transaction Cost Calculation"
     (let [tran (make-transaction {:value 100M :creditor {:type :regular}})
           trans-costs (first (:transactions (srv/calculate-transactions-costs tran)))
-          {rules :rules} (:costs trans-costs)
+          {rules :plan} (:costs trans-costs)
           {values :values} (:costs trans-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
@@ -102,7 +102,7 @@
   (testing "Apply Rules LOW VALUE NOT APPY RATE"
     (let [tran (make-transaction {:value 5M :creditor {:type :regular}})
           trans-costs (first (:transactions (srv/calculate-transactions-costs (list tran))))
-          {rules :rules} (:costs trans-costs)
+          {rules :plan} (:costs trans-costs)
           {values :values} (:costs trans-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
