@@ -27,14 +27,13 @@ SPECIAL
 REGULAR
 }
 
-Transaction --> Creditor : has one
-Transaction --> Debtor : has one
+Transaction --> "1" Creditor : has one
+Transaction --> "1" Debtor : has one
 
 Creditor --> "1" UserType
 Debtor --> "1" UserType
-TransCostsService --> "*" Transaction : " calculates \ncosts of"
-TransCostsService -left-> TransCostsPlan : load
+TransCostsService ..> "*" Transaction : " calculates \ncosts of"
+TransCostsService .left.> TransCostsPlan : load
 Transaction --> "1" TransCosts : has
-TransCostsService --> TransCosts : calculates
-TransCostsService --> TransCostsSummary : returns
+TransCostsService ..> TransCostsSummary : returns
 @enduml
