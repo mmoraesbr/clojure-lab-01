@@ -56,8 +56,7 @@
     trans
     apply-cost-plan
     calc-costs
-    apply-disconts
-    ))
+    apply-disconts))
 
 (defn- summarize-process-costs
   "Reduz uma lista de transações
