@@ -25,14 +25,14 @@
 ;; Records
 ;; ----------------------------------------------------
 (defprotocol Calculator
-  (apply-cost-rules [this] "Apply costs rules by type")
+  (apply-cost-plan [this] "Apply costs plan by type")
   (calc-values [this] "Calculates values based on costs-rules"))
 
 (defrecord TransactionCalculator [id creditor debtor value]
   Calculator ;; implements Calculator
-  (apply-cost-rules
+  (apply-cost-plan
     [this]
-    "Adiciona as regras de custos na transação
+    "Adiciona as regras do plano de custos na transação
      de acordo com o tipo do Creditor"
     (->>
       creditor
@@ -71,7 +71,7 @@
   (->
     trans
     map->TransactionCalculator
-    apply-cost-rules
+    apply-cost-plan
     calc-values
     apply-disconts
     ))
