@@ -1,0 +1,40 @@
+@startuml
+
+class Transaction {
+    + value
+}
+class Creditor
+class Debtor
+class TransCostsPlan {
+    + tax
+    + rate
+}
+class TransCosts {
+    + rate
+    + tax
+    + rate-valule
+    + tax-value
+}
+class TransCostsSummary {
+    + total
+    + transactions
+}
+class TransCostsService {
+    + calculate-transactions-costs()
+}
+enum UserType {
+SPECIAL
+REGULAR
+}
+
+Transaction --> Creditor : has one
+Transaction --> Debtor : has one
+
+Creditor --> "1" UserType
+Debtor --> "1" UserType
+TransCostsService --> "*" Transaction : " calculates \ncosts of"
+TransCostsService -left-> TransCostsPlan : load
+Transaction --> "1" TransCosts : has
+TransCostsService --> TransCosts : calculates
+TransCostsService --> TransCostsSummary : returns
+@enduml

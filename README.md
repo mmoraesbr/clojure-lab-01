@@ -1,33 +1,9 @@
-# clojure-lab-01
+# Clojure-lab-01
 
-FIXME: description
+Clojure Demo Application
 
-## Installation
-
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar clojure-lab-01-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
+## Domain
+![alt text][doc/calculation.png]
 ## License
 
 Copyright © 2016 FIXME

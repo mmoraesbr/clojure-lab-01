@@ -1,0 +1,18 @@
+@startuml
+(*)  --> "Process \ntransaction costs"
+If "is costs peding?" then
+-left-> [Yes] "Find CostsPlan \n by user type"
+--> "Apply CostsPlan to \nTransaction"
+--> "Calculates Costs\nbased on CostsPlan"
+    If "Apply Disconts" then
+        -left-> [Yes] "Apply Disconts\n to Transaction"
+        -down-> "Return Summary"
+    else
+        --> [No] "Return Summary"
+    EndIf
+    -->(*)
+else
+--> [No] "Returns empty \n Summary"
+Endif
+-->(*)
+@enduml
