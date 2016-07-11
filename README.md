@@ -2,8 +2,13 @@
 
 Clojure Demo Application
 
+## Transaction Costs Calculation
+
+![alt text](doc/calculation.png)
+
 ## Domain
-![alt text][doc/calculation.png]
+![alt text](doc/domain.png)
+
 ## License
 
 Copyright © 2016 FIXME
