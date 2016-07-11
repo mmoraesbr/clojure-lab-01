@@ -7,7 +7,7 @@ Clojure Demo Application
 ![alt text](doc/calculation.png)
 
 ## Domain
-![alt text](doc/domain.png)
+![alt text](doc/domain-app.png)
 
 ## License
 
