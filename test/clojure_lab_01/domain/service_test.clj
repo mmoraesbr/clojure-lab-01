@@ -6,21 +6,21 @@
 
 
 (defn set-db! [transactions]
-  "Inicializa o banco de dados"
+  "Initialize database"
   (reset! repo/database transactions))
-
-(defn sum-value [tot cur]
-  (+ (:value cur) tot))
-
-(def ^:private defaults
-  {:special-tax 2M
-   :special-rate 0.3M
-   :regular-tax 4M
-   :regular-rate 0.6M})
 
 ;; ----------------------------
 ;; Cenário padrão
 ;; ----------------------------
+(def
+  ^{:doc "default values used in tests"
+    :private true}
+
+  defaults
+  {:special-tax 2M
+   :special-rate 0.3M
+   :regular-tax 4M
+   :regular-rate 0.6M})
 
 (def pending-transactions
   "Transacoes ainda não proessadas"
@@ -30,6 +30,9 @@
   "Transacoes processadas"
   (for [_ (range 10)] (make-transaction {:costs {:total 0}})))
 
+;; -------------------
+;; Fixtures
+;; -------------------
 (defn with-apply-rules-mock [f]
   "TestFixture: Mock for apply-rules returns default values"
   (with-redefs-fn
@@ -52,12 +55,16 @@
   (f)
   (set-db! []))
 
+;; --------------------------------------
+;; Tests - Transaction Costs Summary
+;; --------------------------------------
+
 (use-fixtures :each with-default-db with-apply-rules-mock)
 
 (deftest summary
   (testing "Summary Total Transaction Values"
     (let [summary (srv/calculate-transactions-costs pending-transactions)
-          total-value (reduce sum-value 0 pending-transactions)
+          total-value (reduce (fn [tot cur] (+ (:value cur) tot)) 0 pending-transactions)
           total-transactions (count pending-transactions)]
       (is (= total-value (:total summary)))
       (is (= total-transactions (count (:transactions summary)))))))
@@ -71,9 +78,12 @@
       (is (empty? transactions))
       (is (= total 0M)))))
 
+;; --------------------------------------
+;; Tests - Transaction Costs Calculations
+;; --------------------------------------
+
 (deftest calc-costs-of-one-transaction
   (testing "Test One Transaction Cost Calculation"
-    (prn "WWWWWWWWWWWWWWWW" )
     (let [tran (make-transaction {:value 100M :creditor {:type :regular}})
           trans-costs (first (:transactions (srv/calculate-transactions-costs tran)))
           {rules :rules} (:costs trans-costs)

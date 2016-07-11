@@ -62,7 +62,6 @@
       (update-in [:transactions] conj trans-info))))
 
 (defn apply-disconts [trans]
-  (prn "YYYYYYYYYYYYYYY" (:value trans) (<= (:value trans) 10M))
   (if (<= (:value trans) 10M)
     (update-in trans [:costs :values] assoc :rate 0M)
     trans))
