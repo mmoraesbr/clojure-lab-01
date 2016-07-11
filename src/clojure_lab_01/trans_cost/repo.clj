@@ -1,4 +1,4 @@
-(ns clojure-lab-01.domain.repo)
+(ns clojure-lab-01.trans-cost.repo)
 
 (def database (atom []))
 

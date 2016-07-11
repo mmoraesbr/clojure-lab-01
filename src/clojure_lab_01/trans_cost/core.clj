@@ -1,4 +1,4 @@
-(ns clojure-lab-01.domain.core)
+(ns clojure-lab-01.trans-cost.core)
 
 
 (defn round [n scale]

@@ -1,6 +1,6 @@
-(ns clojure-lab-01.domain.service
-  (:require [clojure-lab-01.domain.core :refer :all])
-  (:require [clojure-lab-01.domain.repo :as rep]))
+(ns clojure-lab-01.trans-cost.service
+  (:require [clojure-lab-01.trans-cost.core :refer :all])
+  (:require [clojure-lab-01.trans-cost.repo :as rep]))
 
 
 ;; ----------------------------------------------------
