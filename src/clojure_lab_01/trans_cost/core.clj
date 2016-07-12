@@ -1,4 +1,6 @@
-(ns clojure-lab-01.trans-cost.core)
+(ns ^{:doc "Core namespace of trans-cost service"
+      :author "Marcio Moraes"}
+  clojure-lab-01.trans-cost.core)
 
 
 (defn round [n scale]

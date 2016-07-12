@@ -1,4 +1,6 @@
-(ns clojure-lab-01.trans-cost.repo)
+(ns ^{:doc "Repository namespace of transactions"
+      :author "Marcio Moraes"}
+  clojure-lab-01.trans-cost.repo)
 
 (def database (atom []))
 

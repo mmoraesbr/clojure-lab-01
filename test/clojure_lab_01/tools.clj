@@ -1,10 +1,13 @@
-(ns clojure-lab-01.tools)
+(ns ^{:doc "Tests Tools"
+      :author "Marcio Moraes"}
+  clojure-lab-01.tools)
 
 
 (defn round [s n]
   (.setScale (bigdec n) s java.math.RoundingMode/HALF_EVEN))
 
 (defn make-transaction
+  "Creates a transaction for unit tests"
   ([] (make-transaction {}))
   ([{:keys [id creditor debtor value costs]
      :or   {id       1

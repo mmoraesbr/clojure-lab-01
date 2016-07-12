@@ -1,4 +1,6 @@
-(ns clojure-lab-01.trans-cost.service-test
+(ns ^{:doc "Transaction Cost Calculator Service Test"
+      :author "Marcio Moraes"}
+  clojure-lab-01.trans-cost.service-test
   (:require [clojure.test :refer :all]
             [clojure-lab-01.tools :refer :all]
             [clojure-lab-01.trans-cost.service :as srv]
