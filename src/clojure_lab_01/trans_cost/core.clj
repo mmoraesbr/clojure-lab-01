@@ -3,7 +3,11 @@
   clojure-lab-01.trans-cost.core)
 
 
-(defn round [n scale]
+(defn calc-% [tax value]
+  "Execute tax %"
+  (-> tax (/ 100) (* value)))
+
+(defn round [n]
   "Retorna um BigDecimal arredondado"
-  (.setScale (bigdec n) scale java.math.RoundingMode/HALF_EVEN))
+  (with-precision 4 (bigdec n)))
 

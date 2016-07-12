@@ -38,7 +38,7 @@
 (defn calc-costs [trans]
   "Calcula os valores baseados nas regras do Plano de Custo"
   (let [{{{:keys [tax rate]} :plan} :costs} trans
-        tax-val (-> tax (/ 100) (* (:value trans)))
+        tax-val (calc-% tax (:value trans))
         rate-val rate]
     ;; associa o costs com trans
     (update-in trans [:costs]
@@ -68,7 +68,7 @@
         trans-info {:transaction id :value value :costs costs}]
     (-> summary
         (update-in [:total] + value)
-        (update-in [:total] round 4)
+        (update-in [:total] round)
         (update-in [:transactions] conj trans-info))))
 
 (defn- only-pending [trans]

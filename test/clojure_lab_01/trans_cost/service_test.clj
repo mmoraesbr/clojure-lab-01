@@ -11,19 +11,6 @@
   "Initialize database"
   (reset! repo/database transactions))
 
-;; ----------------------------
-;; Cenário padrão
-;; ----------------------------
-(def
-  ^{:doc "default values used in tests"
-    :private true}
-
-  defaults
-  {:special-tax 2M
-   :special-rate 0.3M
-   :regular-tax 4M
-   :regular-rate 0.6M})
-
 (def pending-transactions
   "Transacoes ainda não proessadas"
   (for [_ (range 10)] (make-transaction)))
@@ -31,25 +18,6 @@
 (def not-pending-transactions
   "Transacoes processadas"
   (for [_ (range 10)] (make-transaction {:costs {:total 0}})))
-
-;; -------------------
-;; Fixtures
-;; -------------------
-(defn with-apply-rules-mock [f]
-  "TestFixture: Mock for apply-rules returns default values"
-  (with-redefs-fn
-    {#'srv/load-costs-plan
-     (fn [user]
-       ((:type user)
-         {:special
-          {:plan
-           {:tax (:special-tax defaults)
-            :rate (:special-rate defaults)}}
-          :regular
-          {:plan
-           {:tax (:regular-tax defaults)
-            :rate (:regular-rate defaults)}}}))}
-    #(f)))
 
 (defn with-default-db [f]
   "TestFixture: default databse values"
@@ -61,7 +29,7 @@
 ;; Tests - Transaction Costs Summary
 ;; --------------------------------------
 
-(use-fixtures :each with-default-db with-apply-rules-mock)
+(use-fixtures :each with-default-db)
 
 (deftest summary
   (testing "Summary Total Transaction Values"
@@ -86,30 +54,31 @@
 
 (deftest calc-costs-of-one-transaction
   (testing "Test One Transaction Cost Calculation"
-    (let [tran (make-transaction {:value 100M :creditor {:type :regular}})
+    (let [tran (make-transaction)
+          value (:value tran {:value 1500M})
+          type (:type  (:creditor tran))
           trans-costs (first (:transactions (srv/calculate-transactions-costs tran)))
           {rules :plan} (:costs trans-costs)
           {values :values} (:costs trans-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
 
-      (is (= tax 4.0M))
-      (is (= rate 0.40M))
-      (is (= tax-val 4.0M))
-      (is (= rate-val 0.40M)))))
-
-(use-fixtures :each with-default-db)
+      (is (= tax (get-tax-to type)))
+      (is (= rate (get-rate-to type)))
+      (is (= tax-val (get-tax-value-to value type)))
+      (is (= rate-val (get-rate-to type))))))
 
 (deftest calc-costs-validate-rate-and-values
   (testing "Apply Rules LOW VALUE NOT APPY RATE"
     (let [tran (make-transaction {:value 5M :creditor {:type :regular}})
+          value (:value tran)
           trans-costs (first (:transactions (srv/calculate-transactions-costs (list tran))))
           {rules :plan} (:costs trans-costs)
           {values :values} (:costs trans-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
 
-      (is (= tax 4.0M))
-      (is (= rate 0.40M))
-      (is (= tax-val 0.2M))
-      (is (= rate-val 0.0M)))))
+      (is (= tax (get-tax-to :regular)))
+      (is (= rate (get-rate-to :regular)))
+      (is (= tax-val (get-tax-value-to value :regular)))
+      (is (= rate-val 0M)))))
