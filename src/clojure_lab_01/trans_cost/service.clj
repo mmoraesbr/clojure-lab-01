@@ -27,7 +27,7 @@
 ;; Transaction Costs Calculations
 ;; ----------------------------------------------------
 
-(defn apply-cost-plan
+(defn apply-costs-plan
   [trans]
   "Aplica o Plano de Custo à transação"
   (->>
@@ -56,7 +56,7 @@
   "Aplica as regras e calcula os custos das transações"
   (->
     trans
-    apply-cost-plan
+    apply-costs-plan
     calc-costs
     apply-disconts))
 

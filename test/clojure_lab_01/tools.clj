@@ -7,7 +7,7 @@
 (defn get-tax-to [type]
   "Get tax based on type"
   (->
-    (srv/apply-cost-plan {:creditor  {:type type}})
+    (srv/apply-costs-plan {:creditor {:type type}})
     :costs
     :plan
     :tax))
@@ -15,7 +15,7 @@
 (defn get-rate-to [type]
   "Get tax based on type"
   (->
-    (srv/apply-cost-plan {:creditor  {:type type}})
+    (srv/apply-costs-plan {:creditor {:type type}})
     :costs
     :plan
     :rate))

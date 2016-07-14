@@ -57,9 +57,9 @@
     (let [tran (make-transaction)
           value (:value tran {:value 1500M})
           type (:type  (:creditor tran))
-          trans-costs (first (:transactions (srv/calculate-transactions-costs tran)))
-          {rules :plan} (:costs trans-costs)
-          {values :values} (:costs trans-costs)
+          trans-with-costs (first (:transactions (srv/calculate-transactions-costs tran)))
+          {rules :plan} (:costs trans-with-costs)
+          {values :values} (:costs trans-with-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
 
@@ -72,12 +72,11 @@
   (testing "Apply Rules LOW VALUE NOT APPY RATE"
     (let [tran (make-transaction {:value 5M :creditor {:type :regular}})
           value (:value tran)
-          trans-costs (first (:transactions (srv/calculate-transactions-costs (list tran))))
-          {rules :plan} (:costs trans-costs)
-          {values :values} (:costs trans-costs)
+          trans-with-costs (first (:transactions (srv/calculate-transactions-costs (list tran))))
+          {rules :plan} (:costs trans-with-costs)
+          {values :values} (:costs trans-with-costs)
           {:keys [tax rate]} rules
           {tax-val :tax rate-val :rate} values]
-
       (is (= tax (get-tax-to :regular)))
       (is (= rate (get-rate-to :regular)))
       (is (= tax-val (get-tax-value-to value :regular)))
